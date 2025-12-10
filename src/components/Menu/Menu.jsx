@@ -378,7 +378,7 @@ const Menu = ({ onMenuStateChange }) => {
                 href="/work"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigateTo("/work");
+                  // navigateTo("/work");
                 }}
               >
                 <h1>work,</h1>
@@ -389,7 +389,7 @@ const Menu = ({ onMenuStateChange }) => {
                 href="/studio"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigateTo("/studio");
+                  // navigateTo("/studio");
                 }}
               >
                 <h1>studio,</h1>
@@ -400,7 +400,7 @@ const Menu = ({ onMenuStateChange }) => {
                 href="/archive"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigateTo("/archive");
+                  // navigateTo("/archive");
                 }}
               >
                 <h1>archive,</h1>
@@ -411,7 +411,7 @@ const Menu = ({ onMenuStateChange }) => {
                 href="/contact"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigateTo("/contact");
+                  // navigateTo("/contact");
                 }}
               >
                 <h1>contact</h1>
@@ -429,7 +429,7 @@ const Menu = ({ onMenuStateChange }) => {
                 <div className="revealer">
                   <a
                     className="sm caps mono"
-                    href="https://www.youtube.com/@codegrid"
+                    // href="https://www.youtube.com/@codegrid"
                   >
                     YouTube
                   </a>
@@ -437,13 +437,16 @@ const Menu = ({ onMenuStateChange }) => {
                 <div className="revealer">
                   <a
                     className="sm caps mono"
-                    href="https://www.instagram.com/codegridweb/"
+                    // href="https://www.instagram.com/codegridweb/"
                   >
                     Instagram
                   </a>
                 </div>
                 <div className="revealer">
-                  <a className="sm caps mono" href="https://x.com/codegridweb">
+                  <a
+                    className="sm caps mono"
+                    // href="https://x.com/codegridweb"
+                  >
                     X
                   </a>
                 </div>

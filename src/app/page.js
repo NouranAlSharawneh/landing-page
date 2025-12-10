@@ -199,7 +199,10 @@ export default function Home() {
               </div>
 
               <div className="hero-link">
-                <BtnLink route="/contact" label="contact" />
+                <BtnLink
+                  // route="/contact"
+                  label="contact"
+                />
               </div>
             </div>
           </div>
