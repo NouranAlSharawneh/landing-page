@@ -22,7 +22,7 @@ const nm = localFont({
 
 export const metadata = {
   title: "Enigma",
-  description: "Creative Studio MWT Website Template — Codegrid",
+  // description: "Creative Studio MWT Website Template — Codegrid",
 };
 
 export default function RootLayout({ children }) {
