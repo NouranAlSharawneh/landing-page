@@ -1,19 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
-
 :root {
   --background: #783293;
   --background-200: #22043a;
   --foreground: #e4e7df;
   --foreground-200: #666666;
   --btn-icon: #499ad4;
-}
-
-@font-face {
-  font-family: "nm";
-  src: url("/fonts/nm/nm-medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
 }
 
 * {
@@ -23,7 +13,7 @@
 }
 
 body {
-  font-family: "nm";
+  font-family: var(--font-nm);
   background-color: #22043a;
 }
 
@@ -88,7 +78,7 @@ a.caps {
 
 p.caps.mono,
 a.caps.mono {
-  font-family: "DM Mono";
+  font-family: var(--font-dm-mono);
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
 }
