@@ -12,6 +12,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomEase from "gsap/CustomEase";
 import WhoWeAre from "@/components/WhoWeAre/WhoWeAre";
 import ProcessCards from "@/components/ProcessCards/ProcessCards";
+import Footer from "@/components/Footer copy/Footer";
+import HowWeWork from "@/components/HowWeWork/HowWeWork";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create("hop", "0.9, 0, 0.1, 1");
@@ -30,6 +32,8 @@ export default function Home() {
   useGSAP(() => {
     const heroLink = document.querySelector(".hero-link");
     const animationDelay = showPreloader ? 6.2 : 0.9;
+
+    const missionLinkWrapper = document.querySelector(".mission-link");
 
     if (showPreloader) {
       const tl = gsap.timeline({
@@ -113,6 +117,25 @@ export default function Home() {
         ease: "power4.out",
       });
     }
+
+    if (missionLinkWrapper) {
+      gsap.set(missionLinkWrapper, { y: 30, opacity: 0 });
+
+      ScrollTrigger.create({
+        trigger: missionLinkWrapper.closest(".mission-intro-copy"),
+        start: "top 75%",
+        once: true,
+        onEnter: () => {
+          gsap.to(missionLinkWrapper, {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            delay: 1.5,
+            ease: "power3.out",
+          });
+        },
+      });
+    }
   }, [showPreloader]);
 
   return (
@@ -168,7 +191,7 @@ export default function Home() {
       <section className="hero">
         <DynamicBackground />
 
-        <div className="hero-content">
+        <div className="hero-content" style={{ pointerEvents: "none" }}>
           <div className="hero-header">
             <div className="hero-header-col-lg"></div>
             <div className="hero-header-col-sm">
@@ -208,7 +231,60 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <WhoWeAre />
+
+      <section className="mission-intro">
+        <div className="mission-intro-col-sm"></div>
+        <div className="mission-intro-col-lg">
+          <div className="mission-intro-copy">
+            <Copy>
+              {/* <h3>
+                We are a digital studio dedicated to creating clear and
+                purposeful online experiences. Our work is rooted in structure,
+                guided by systems, and shaped through close collaboration.
+              </h3> */}
+              <h3>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                euismod, nunc ut sollicitudin malesuada, nunc nisl aliquam
+                mauris, eget aliquam nisl nunc euismod nunc. Lorem ipsum dolor
+                sit amet, consectetur adipiscing elit. Sed euismod, nunc ut
+              </h3>
+              <br />
+              {/* <h3>
+                With a focus on design and development, we build scalable
+                solutions that reflect quiet precision and long-term value.
+                Every project is an exercise in restraint, intention, and
+                technical care.
+              </h3> */}
+              <h3>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                euismod, nunc ut sollicitudin malesuada, nunc nisl aliquam
+                mauris, eget aliquam nisl nunc euismod nunc. Lorem ipsum dolor
+                sit amet, consectetur adipiscing elit. Sed euismod,
+              </h3>
+            </Copy>
+
+            <div className="mission-link">
+              <BtnLink
+                // route="/work"
+                label="View Work"
+                dark
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ProcessCards />
+
+      <section className="how-we-work-container">
+        <div className="container">
+          <HowWeWork />
+        </div>
+      </section>
+
+      <Footer />
     </>
   );
 }

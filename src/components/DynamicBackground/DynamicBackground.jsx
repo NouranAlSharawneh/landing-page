@@ -388,6 +388,38 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
       execCountRef.current = 300;
     };
 
+    const handleTouchStart = (event) => {
+      if (isCleanedUpRef.current) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const touch = event.touches[0];
+
+      if (touch) {
+        mouseRef.current.x = (touch.clientX - rect.left) * dpr;
+        mouseRef.current.y = (touch.clientY - rect.top) * dpr;
+        execCountRef.current = 150;
+      }
+    };
+
+    const handleTouchMove = (event) => {
+      if (isCleanedUpRef.current) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const touch = event.touches[0];
+
+      if (touch) {
+        mouseRef.current.x = (touch.clientX - rect.left) * dpr;
+        mouseRef.current.y = (touch.clientY - rect.top) * dpr;
+        execCountRef.current = 150;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if (isCleanedUpRef.current) return;
+    };
+
     const handleResize = () => {
       if (isCleanedUpRef.current) return;
 
@@ -419,6 +451,12 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
 
     if (!isMobileRef.current) {
       document.addEventListener("mousemove", handleMouseMove);
+    } else {
+      canvas.addEventListener("touchstart", handleTouchStart, {
+        passive: true,
+      });
+      canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+      canvas.addEventListener("touchend", handleTouchEnd, { passive: true });
     }
     window.addEventListener("resize", handleResize);
 
@@ -434,6 +472,10 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
 
       if (!isMobileRef.current) {
         document.removeEventListener("mousemove", handleMouseMove);
+      } else {
+        canvas.removeEventListener("touchstart", handleTouchStart);
+        canvas.removeEventListener("touchmove", handleTouchMove);
+        canvas.removeEventListener("touchend", handleTouchEnd);
       }
       window.removeEventListener("resize", handleResize);
 
@@ -482,8 +524,8 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: -1,
-        pointerEvents: "none",
+        zIndex: 0,
+        pointerEvents: "auto",
         backgroundColor: "transparent",
         mixBlendMode: "normal",
       }}
