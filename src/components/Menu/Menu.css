@@ -75,6 +75,7 @@
 
 img.logo-img {
   width: 2rem;
+  cursor: pointer;
 }
 
 .menu-overlay {

@@ -1,7 +1,7 @@
 /* Main Section Wrapper */
 .innovate-wrap {
   position: relative;
-  padding: 5rem 0 5rem 0;
+  padding: 10rem 0 5rem 0;
   background-color: var(--background);
 }
 
@@ -45,7 +45,6 @@
 
 .innovate-mono {
   font-size: clamp(1.075rem, 0.325rem + 0.825vw, 2rem);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 500;
 }
@@ -135,6 +134,14 @@
   display: block;
   line-height: 0.75;
   box-sizing: border-box;
+  /* GPU acceleration optimizations */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  contain: layout paint;
+  /* Font rendering optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Layer Variations */
@@ -165,7 +172,7 @@
 /* Responsive Design */
 @media (max-width: 1000px) {
   .innovate-wrap {
-    padding: 5rem 1.5rem 2rem 1.5rem;
+    padding: 5rem 1.5rem 5rem 1.5rem;
   }
 
   .innovate-header {

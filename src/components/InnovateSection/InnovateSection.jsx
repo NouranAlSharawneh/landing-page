@@ -39,7 +39,7 @@ const InnovateSection = () => {
               trigger: section,
               start: "top top",
               end: "bottom top",
-              scrub: 1,
+              scrub: 0.5,
             },
           }
         );
@@ -59,7 +59,7 @@ const InnovateSection = () => {
               trigger: section,
               start: "top top",
               end: "bottom top",
-              scrub: 1,
+              scrub: 0.5,
             },
           }
         );
