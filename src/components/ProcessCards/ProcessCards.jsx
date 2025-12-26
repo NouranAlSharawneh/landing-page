@@ -12,30 +12,23 @@ const ProcessCards = () => {
     {
       index: "01",
       title: "Photobooth",
-      // image: "/images/process/process_001.jpeg",
+      image: "/images/ourProducts/photobooth.jpeg",
       description:
         "Blending real photography with AI creativity — photos delivered instantly to the user.",
     },
     {
       index: "02",
       title: "Sketch to Art",
-      // image: "/images/process/process_002.jpeg",
+      image: "/images/ourProducts/sketchToArt.jpeg",
       description:
         "We created an interactive system where users can draw a simple sketch, and our AI instantly transforms it into a stunning digital artwork. It’s an immersive installation that turns pure imagination into visual art—inviting users to create, explore, and be inspired by the power of AI-driven creativity.",
     },
     {
       index: "03",
       title: "Mosaic Grid",
-      // image: "/images/process/process_003.jpeg",
+      image: "/images/ourProducts/mosaic.jpeg",
       description:
         "Our Mosaic Grid system transforms event engagement into a meaningful, memorable experience. It allows attendees to capture photos during the event and instantly place them within a beautifully designed digital mosaic grid displayed above your brand or event logo.",
-    },
-    {
-      index: "04",
-      title: "Vision",
-      // image: "/images/process/process_004.jpeg",
-      description:
-        "We believe the web should feel honest and effortless. Our aim is to create digital experiences that stand the test of time.",
     },
   ];
 

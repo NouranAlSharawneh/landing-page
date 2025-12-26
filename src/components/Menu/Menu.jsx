@@ -148,18 +148,17 @@ const Menu = ({ onMenuStateChange }) => {
   const navigateTo = (path) => {
     if (isAnimating) return;
 
-    if (isExactPath(path)) {
-      closeMenu();
-      return;
-    }
-
     closeMenu();
 
     setTimeout(() => {
-      router.push(path, {
-        onTransitionReady: slideInOut,
-      });
-    }, 0);
+      const targetElement = document.querySelector(path);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 600);
   };
 
   const openMenu = () => {
@@ -333,19 +332,17 @@ const Menu = ({ onMenuStateChange }) => {
             </div>
           </div>
 
-          <div className="nav-items">
-            {/* <div className="nav-menu-time">
-              <div className="revealer">
-                <p className="sm caps mono">{currentTime}</p>
-              </div>
-            </div> */}
+          <div className="nav-menu-time">
+            <div className="revealer">
+              <p className="sm caps mono">{currentTime}</p>
+            </div>
+          </div>
 
-            <div className="nav-menu-toggle-open">
-              <div className="revealer" onClick={openMenu}>
-                <p className="sm caps mono" ref={menuBtnRef}>
-                  Menu
-                </p>
-              </div>
+          <div className="nav-menu-toggle-open">
+            <div className="revealer" onClick={openMenu}>
+              <p className="sm caps mono" ref={menuBtnRef}>
+                Menu
+              </p>
             </div>
           </div>
         </div>
@@ -364,54 +361,44 @@ const Menu = ({ onMenuStateChange }) => {
           <div className="menu-overlay-items" ref={menuItemsRef}>
             <div className="revealer">
               <a
-                href="/"
+                href="#hero"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigateTo("/");
+                  navigateTo("#hero");
                 }}
               >
-                <h1>index,</h1>
+                <h1>home,</h1>
               </a>
             </div>
             <div className="revealer">
               <a
-                href="/work"
+                href="#how-we-work"
                 onClick={(e) => {
                   e.preventDefault();
-                  // navigateTo("/work");
+                  navigateTo("#how-we-work");
                 }}
               >
-                <h1>work,</h1>
+                <h1>our process,</h1>
               </a>
             </div>
             <div className="revealer">
               <a
-                href="/studio"
+                href="#work"
                 onClick={(e) => {
                   e.preventDefault();
-                  // navigateTo("/studio");
+                  navigateTo("#work");
                 }}
               >
-                <h1>studio,</h1>
+                <h1>our products,</h1>
               </a>
             </div>
+
             <div className="revealer">
               <a
-                href="/archive"
+                href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
-                  // navigateTo("/archive");
-                }}
-              >
-                <h1>archive,</h1>
-              </a>
-            </div>
-            <div className="revealer">
-              <a
-                href="/contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  // navigateTo("/contact");
+                  navigateTo("#contact");
                 }}
               >
                 <h1>contact</h1>
@@ -421,7 +408,9 @@ const Menu = ({ onMenuStateChange }) => {
           <div className="menu-footer" ref={menuFooterColsRef}>
             <div className="menu-footer-col">
               <div className="revealer">
-                <p className="sm caps mono">&copy; 2025 All Rights Reserved</p>
+                <p className="sm caps mono">
+                  &copy; {new Date().getFullYear()} All Rights Reserved
+                </p>
               </div>
             </div>
             <div className="menu-footer-col">
@@ -429,25 +418,29 @@ const Menu = ({ onMenuStateChange }) => {
                 <div className="revealer">
                   <a
                     className="sm caps mono"
-                    // href="https://www.youtube.com/@codegrid"
+                    href="https://www.linkedin.com/company/enigma-ai-company/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    YouTube
+                    LinkedIn
                   </a>
                 </div>
                 <div className="revealer">
                   <a
                     className="sm caps mono"
-                    // href="https://www.instagram.com/codegridweb/"
+                    href="https://wa.me/+966543799104"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Instagram
+                    WhatsApp
                   </a>
                 </div>
                 <div className="revealer">
                   <a
                     className="sm caps mono"
-                    // href="https://x.com/codegridweb"
+                    href="mailto:contact@enigma-ai.co"
                   >
-                    X
+                    Email
                   </a>
                 </div>
               </div>

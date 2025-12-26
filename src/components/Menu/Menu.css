@@ -50,23 +50,22 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.nav-logo {
-  flex: 2;
-}
-
-.nav-items {
+.nav-logo,
+.nav-menu-time,
+.nav-menu-toggle-open {
   flex: 1;
-  display: flex;
 }
 
-.nav-menu-toggle-open,
 .nav-menu-time {
-  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-menu-toggle-open {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   height: max-content;
 }
 

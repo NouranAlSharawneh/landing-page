@@ -188,7 +188,7 @@ export default function Home() {
         </div>
       )}
 
-      <section className="hero">
+      <section id="hero" className="hero">
         <DynamicBackground />
 
         <div className="hero-content" style={{ pointerEvents: "none" }}>
@@ -232,13 +232,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="how-we-work-container">
+      <section id="how-we-work" className="how-we-work-container">
         <div className="container">
           <HowWeWork />
         </div>
       </section>
 
-      <WhoWeAre />
+      <div id="who-we-are">
+        <WhoWeAre />
+      </div>
 
       <section className="mission-intro">
         <div className="mission-intro-col-sm"></div>
@@ -274,7 +276,9 @@ export default function Home() {
         </div>
       </section>
 
-      <ProcessCards />
+      <div id="work">
+        <ProcessCards />
+      </div>
 
       <Footer />
     </>
