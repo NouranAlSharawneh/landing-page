@@ -23,7 +23,7 @@
 
 body {
   font-family: var(--font-nm);
-  background-color: #22043a;
+  background-color: var(--background);
 }
 
 img {
