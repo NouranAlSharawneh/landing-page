@@ -1,5 +1,6 @@
 "use client";
 import "./ProcessCards.css";
+import Image from "next/image";
 
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -49,22 +50,24 @@ const ProcessCards = () => {
       }
 
       if (index < processCards.length - 1) {
-        ScrollTrigger.create({
-          trigger: processCards[index + 1],
-          start: "top bottom",
-          end: "top top",
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const scale = 1 - progress * 0.25;
-            const rotation = (index % 2 === 0 ? 5 : -5) * progress;
-            const afterOpacity = progress;
-
-            gsap.set(card, {
-              scale: scale,
-              rotation: rotation,
-              "--after-opacity": afterOpacity,
-            });
+        // Create a timeline for smooth, scrubbed animation
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: processCards[index + 1],
+            start: "top bottom",
+            end: "top top",
+            scrub: 0.5, // Smooth scrubbing with slight delay for polish
+            id: `card-animate-${index}`,
           },
+        });
+
+        // Animate from initial state to final state
+        const rotation = index % 2 === 0 ? 5 : -5;
+        tl.to(card, {
+          scale: 0.75, // 1 - 0.25
+          rotation: rotation,
+          "--after-opacity": 1,
+          ease: "none", // Linear easing for scrubbed animations
         });
       }
     });
@@ -82,7 +85,15 @@ const ProcessCards = () => {
               <h1 className="process-card-header">{cardData.title}</h1>
 
               <div className="process-card-img">
-                <img src={cardData.image} alt="" />
+                <Image
+                  src={cardData.image}
+                  alt={cardData.title}
+                  width={1920}
+                  height={1152}
+                  quality={85}
+                  loading="lazy"
+                  sizes="(max-width: 1000px) 100vw, 75vw"
+                />
               </div>
 
               <div className="process-card-copy">

@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import Copy from "../Copy/Copy";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -190,7 +191,15 @@ const HowWeWork = () => {
         {steps.map((step, index) => (
           <div className="how-we-work-card" key={index}>
             <div className="how-we-work-card-img">
-              <img src={step.image} alt="" />
+              <Image
+                src={`/${step.image}`}
+                alt={step.title}
+                width={1920}
+                height={1080}
+                quality={85}
+                loading="lazy"
+                sizes="(max-width: 1000px) 100vw, 50vw"
+              />
             </div>
             <div className="how-we-work-card-copy">
               <div className="how-we-work-card-index-label">

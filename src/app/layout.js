@@ -126,11 +126,6 @@ export const metadata = {
       "Enigma creates custom AI-powered interactive experiences and smart products in Riyadh, Saudi Arabia. From AI photobooths to sketch-to-art installations, we deliver intelligent solutions for events and businesses.",
     images: ["/images/seo.png"],
   },
-  icons: {
-    icon: "/images/logos/whiteFavicon.png",
-    shortcut: "/images/logos/whiteFavicon.png",
-    apple: "/images/logos/whiteFavicon.png",
-  },
   manifest: "/manifest.json",
   themeColor: "#000000",
   viewport: {

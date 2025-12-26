@@ -15,6 +15,7 @@
   display: flex;
   gap: 3rem;
   will-change: transform;
+  contain: layout style paint;
 }
 
 .process-card::after {
@@ -26,7 +27,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: var(--after-opacity, 0);
-  transition: opacity 0.1s ease;
+  /* Removed CSS transition to avoid conflict with GSAP scroll animation */
   pointer-events: none;
   z-index: 2;
 }

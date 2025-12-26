@@ -14,6 +14,8 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
   const execCountRef = useRef(0);
   const isCleanedUpRef = useRef(false);
   const isMobileRef = useRef(false);
+  const isVisibleRef = useRef(true);
+  const lastFrameTimeRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -265,7 +267,7 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
     }
 
     function startAnimation() {
-      function animate() {
+      function animate(currentTime) {
         if (
           isCleanedUpRef.current ||
           !gl ||
@@ -274,6 +276,24 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
         ) {
           return;
         }
+
+        // Skip animation if not visible
+        if (!isVisibleRef.current) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+          return;
+        }
+
+        // Throttle to 30fps when not interacting to reduce CPU usage
+        const fps = execCountRef.current > 0 ? 60 : 30;
+        const frameInterval = 1000 / fps;
+        const elapsed = currentTime - lastFrameTimeRef.current;
+
+        if (elapsed < frameInterval) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+          return;
+        }
+
+        lastFrameTimeRef.current = currentTime - (elapsed % frameInterval);
 
         if (execCountRef.current > 0) {
           execCountRef.current -= 1;
@@ -460,6 +480,18 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
     }
     window.addEventListener("resize", handleResize);
 
+    // Add Intersection Observer to pause animation when not visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisibleRef.current = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(canvas);
+
     loadLogo();
 
     return () => {
@@ -478,6 +510,8 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
         canvas.removeEventListener("touchend", handleTouchEnd);
       }
       window.removeEventListener("resize", handleResize);
+
+      observer.disconnect();
 
       if (gl && !gl.isContextLost()) {
         try {
