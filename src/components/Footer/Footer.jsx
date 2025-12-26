@@ -2,6 +2,7 @@
 import "./Footer.css";
 
 import { useRef } from "react";
+import Image from "next/image";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -130,8 +131,8 @@ const Footer = () => {
       </div>
       <div className="footer-outro">
         <div className="container">
-          <div className="footer-header">
-            <img ref={textLogoRef} src="images/logos/textLogo.svg" alt="" />
+          <div className="footer-header" ref={textLogoRef}>
+            <Image src="/images/logos/textLogo.svg" alt="Enigma Logo" width={200} height={50} />
           </div>
           <div className="footer-copyright">
             <p>

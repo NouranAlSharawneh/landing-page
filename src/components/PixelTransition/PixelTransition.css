@@ -1,0 +1,34 @@
+.pixel-transition-section {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 18vh;
+  background-color: var(--background);
+}
+
+.pixel-transition {
+  width: 100%;
+  height: 150vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  grid-gap: 0;
+  position: relative;
+}
+
+.pixel-item {
+  width: 100%;
+  height: 100%;
+  background-color: var(--foreground);
+  transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 767px) {
+  .pixel-transition-section {
+    padding-bottom: 20vh;
+  }
+
+  .pixel-transition {
+    height: 80vh;
+  }
+}

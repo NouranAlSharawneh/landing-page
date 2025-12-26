@@ -14,6 +14,7 @@ import WhoWeAre from "@/components/WhoWeAre/WhoWeAre";
 import ProcessCards from "@/components/ProcessCards/ProcessCards";
 import Footer from "@/components/Footer/Footer";
 import HowWeWork from "@/components/HowWeWork/HowWeWork";
+import PixelTransition from "@/components/PixelTransition/PixelTransition";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create("hop", "0.9, 0, 0.1, 1");
@@ -279,6 +280,8 @@ export default function Home() {
       <div id="work">
         <ProcessCards />
       </div>
+
+      <PixelTransition />
 
       <Footer />
     </>

@@ -146,8 +146,6 @@ const Menu = ({ onMenuStateChange }) => {
   };
 
   const navigateTo = (path) => {
-    if (isAnimating) return;
-
     closeMenu();
 
     setTimeout(() => {
@@ -165,6 +163,8 @@ const Menu = ({ onMenuStateChange }) => {
     if (isAnimating) return;
 
     onMenuStateChange?.(true);
+
+    menuOverlayRef.current.style.pointerEvents = "all";
 
     setIsAnimating(true);
     const tl = gsap.timeline({
@@ -187,9 +187,6 @@ const Menu = ({ onMenuStateChange }) => {
         opacity: 1,
         duration: 0.5,
         ease: "power3.out",
-        onStart: () => {
-          menuOverlayRef.current.style.pointerEvents = "all";
-        },
       },
       "-=0.45"
     );

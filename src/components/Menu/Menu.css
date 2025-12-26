@@ -148,11 +148,21 @@ img.logo-img {
   flex-wrap: wrap;
   gap: 0rem 1rem;
   align-items: flex-start;
+  pointer-events: all;
+  position: relative;
+  z-index: 10;
 }
 
 .menu-overlay-items .revealer {
   flex: 0 0 auto;
   min-width: max-content;
+  pointer-events: all;
+}
+
+.menu-overlay-items a {
+  pointer-events: all;
+  position: relative;
+  z-index: 1;
 }
 
 .revealer {
