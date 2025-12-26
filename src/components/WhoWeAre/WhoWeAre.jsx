@@ -17,14 +17,6 @@ const WhoWeAre = () => {
     const targetProgress = 1;
     const maxTranslateAtTarget = maxTranslateX / targetProgress;
 
-    const images = [
-      { id: "#whoweare-img-1", endTranslateX: -800 },
-      { id: "#whoweare-img-2", endTranslateX: -1200 },
-      { id: "#whoweare-img-3", endTranslateX: -600 },
-      { id: "#whoweare-img-4", endTranslateX: -1000 },
-      { id: "#whoweare-img-5", endTranslateX: -900 },
-    ];
-
     ScrollTrigger.create({
       trigger: ".whoweare",
       start: "top bottom",
@@ -81,25 +73,6 @@ const WhoWeAre = () => {
         });
       },
     });
-
-    images.forEach((img) => {
-      ScrollTrigger.create({
-        trigger: ".whoweare",
-        start: "top top",
-        end: `+=${window.innerHeight * 6}`,
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-
-          if (progress >= 0.3) {
-            const adjustedProgress = (progress - 0.3) / (1 - 0.3);
-            gsap.set(img.id, {
-              x: `${img.endTranslateX * adjustedProgress}px`,
-            });
-          }
-        },
-      });
-    });
   }, []);
 
   return (
@@ -109,22 +82,6 @@ const WhoWeAre = () => {
           <div className="whoweare-header">
             <h1>Our Products</h1>
           </div>
-
-          {/* <div className="whoweare-img" id="whoweare-img-1">
-            <img src="/images/who-we-are/product-1.png" alt="" />
-          </div>
-          <div className="whoweare-img" id="whoweare-img-2">
-            <img src="/images/who-we-are/product-2.png" alt="" />
-          </div>
-          <div className="whoweare-img" id="whoweare-img-3">
-            <img src="/images/who-we-are/product-3.png" alt="" />
-          </div>
-          <div className="whoweare-img" id="whoweare-img-4">
-            <img src="/images/who-we-are/product-2.png" alt="" />
-          </div>
-          <div className="whoweare-img" id="whoweare-img-5">
-            <img src="/images/who-we-are/product-1.png" alt="" />
-          </div> */}
         </div>
       </div>
     </section>

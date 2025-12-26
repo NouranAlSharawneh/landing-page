@@ -149,7 +149,7 @@
   width: 100vw;
   height: 100%;
   min-height: 100svh;
-  background-color: black;
+  background-color: var(--background);
   color: white;
 }
 

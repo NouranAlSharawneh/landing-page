@@ -20,6 +20,33 @@ const HowWeWork = () => {
   const [isMobile, setIsMobile] = useState(false);
   const scrollTriggersRef = useRef([]);
 
+  const steps = [
+    {
+      title: "Discovery / Insight",
+      image: "images/howWeWork/howWeWork2.png",
+      description:
+        "We start by understanding your vision, users, and business context. Through workshops, research, and data analysis, we uncover opportunities and define clear objectives for a solution built around your needs.",
+    },
+    {
+      title: "Strategy / Architecture",
+      image: "images/howWeWork/howWeWork3.png",
+      description:
+        "We translate insights into a clear strategy and technical direction. User flows, system architecture, and AI opportunities are mapped to ensure scalability, performance, and long-term value.",
+    },
+    {
+      title: "Design / Development",
+      image: "images/howWeWork/howWeWork1.png",
+      description:
+        "Our teams design intuitive interfaces and build robust systems in parallel. Prototypes are tested, refined, and engineered using technologies chosen specifically for your solution.",
+    },
+    {
+      title: "Launch / Optimization",
+      image: "images/howWeWork/howWeWork4.png",
+      description:
+        "We deploy with confidence and monitor performance closely. Continuous optimization, iteration, and support ensure your solution evolves with your users and business goals.",
+    },
+  ];
+
   const checkMobile = () => {
     setIsMobile(window.innerWidth <= 1000);
   };
@@ -117,9 +144,9 @@ const HowWeWork = () => {
             </div>
             <Copy delay={0.15}>
               <h3>
-                We create custom AI entertainment solutions designed to engage
-                audiences, elevate events, and fit seamlessly into your vision
-                from concept to live activation.
+                We create custom AI solutions designed to engage audiences,
+                elevate events, and fit seamlessly into your vision from concept
+                to live activation.
               </h3>
             </Copy>
             <div className="how-we-work-steps" ref={stepsRef}>
@@ -160,66 +187,19 @@ const HowWeWork = () => {
         </div>
       </div>
       <div className="how-we-work-col how-we-work-cards" ref={cardsRef}>
-        <div className="how-we-work-card">
-          <div className="how-we-work-card-img">
-            <img src="/how-we-work/process-1.jpg" alt="" />
-          </div>
-          <div className="how-we-work-card-copy">
-            <div className="how-we-work-card-index-label">
-              <h3>Discovery / Context</h3>
+        {steps.map((step, index) => (
+          <div className="how-we-work-card" key={index}>
+            <div className="how-we-work-card-img">
+              <img src={step.image} alt="" />
             </div>
-            <p className="md">
-              We begin with listening and study. Site, climate, and daily
-              routines inform the brief so we can define aims, constraints, and
-              measures of success with clarity.
-            </p>
-          </div>
-        </div>
-        <div className="how-we-work-card">
-          <div className="how-we-work-card-img">
-            <img src="/how-we-work/process-2.jpg" alt="" />
-          </div>
-          <div className="how-we-work-card-copy">
-            <div className="how-we-work-card-index-label">
-              <h3>Principles / Direction</h3>
+            <div className="how-we-work-card-copy">
+              <div className="how-we-work-card-index-label">
+                <h3>{step.title}</h3>
+              </div>
+              <p className="md">{step.description}</p>
             </div>
-            <p className="md">
-              We set guiding principles for light, massing, and flow. Quick
-              models and diagrams test options and reveal the direction that
-              best serves the brief.
-            </p>
           </div>
-        </div>
-        <div className="how-we-work-card">
-          <div className="how-we-work-card-img">
-            <img src="/how-we-work/process-3.jpg" alt="" />
-          </div>
-          <div className="how-we-work-card-copy">
-            <div className="how-we-work-card-index-label">
-              <h3>Detail / Coordination</h3>
-            </div>
-            <p className="md">
-              We develop drawings and specifications across structure, services,
-              and joinery. Materials and samples are reviewed in natural light
-              while budget and timeline stay in view.
-            </p>
-          </div>
-        </div>
-        <div className="how-we-work-card">
-          <div className="how-we-work-card-img">
-            <img src="/how-we-work/process-4.jpg" alt="" />
-          </div>
-          <div className="how-we-work-card-copy">
-            <div className="how-we-work-card-index-label">
-              <h3>Build / Handover</h3>
-            </div>
-            <p className="md">
-              We oversee construction with care and precision. After final
-              review and finishing, we hand over a space that is ready to live
-              in, complete with guidance for long term care.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

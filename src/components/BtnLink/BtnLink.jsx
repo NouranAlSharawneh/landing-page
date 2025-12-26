@@ -1,10 +1,16 @@
 "use client";
 import { useTransitionRouter } from "next-view-transitions";
-import { IoMdArrowForward } from "react-icons/io";
+import { IoMdArrowForward, IoMdArrowDown } from "react-icons/io";
 
 import "./BtnLink.css";
 
-const BtnLink = ({ label, route, dark = false }) => {
+const BtnLink = ({
+  label,
+  route,
+  dark = false,
+  disabled = false,
+  arrowDown = false,
+}) => {
   const router = useTransitionRouter();
 
   function slideInOut() {
@@ -46,6 +52,10 @@ const BtnLink = ({ label, route, dark = false }) => {
   }
 
   const handleClick = (e) => {
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
     e.preventDefault();
     router.push(route, {
       onTransitionReady: slideInOut,
@@ -69,7 +79,11 @@ const BtnLink = ({ label, route, dark = false }) => {
           </p>
         </div>
         <div className="anime-link-icon">
-          <IoMdArrowForward color={dark ? "#fff" : "#000"} />
+          {arrowDown ? (
+            <IoMdArrowDown color={dark ? "#fff" : "#000"} />
+          ) : (
+            <IoMdArrowForward color={dark ? "#fff" : "#000"} />
+          )}
         </div>
       </div>
     </a>

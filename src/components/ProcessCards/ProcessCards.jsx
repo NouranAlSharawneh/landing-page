@@ -94,7 +94,7 @@ const ProcessCards = () => {
 
               <div className="process-card-copy">
                 <div className="process-card-copy-title">
-                  <p className="caps">(About the state)</p>
+                  <p className="caps">(About the product)</p>
                 </div>
                 <div className="process-card-copy-description">
                   <p>{cardData.description}</p>

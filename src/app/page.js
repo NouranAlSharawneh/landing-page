@@ -12,7 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomEase from "gsap/CustomEase";
 import WhoWeAre from "@/components/WhoWeAre/WhoWeAre";
 import ProcessCards from "@/components/ProcessCards/ProcessCards";
-import Footer from "@/components/Footer copy/Footer";
+import Footer from "@/components/Footer/Footer";
 import HowWeWork from "@/components/HowWeWork/HowWeWork";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
@@ -31,13 +31,13 @@ export default function Home() {
 
   useGSAP(() => {
     const heroLink = document.querySelector(".hero-link");
-    const animationDelay = showPreloader ? 6.2 : 0.9;
+    const animationDelay = showPreloader ? 3.5 : 0.9;
 
     const missionLinkWrapper = document.querySelector(".mission-link");
 
     if (showPreloader) {
       const tl = gsap.timeline({
-        delay: 0.3,
+        delay: 0.2,
         defaults: {
           ease: "hop",
         },
@@ -48,7 +48,7 @@ export default function Home() {
       const preloaderOverlay = document.querySelector(".preloader-overlay");
 
       const progressTl = gsap.timeline({
-        delay: 0.3,
+        delay: 0.2,
       });
 
       counts.forEach((count, index) => {
@@ -58,10 +58,10 @@ export default function Home() {
           digits,
           {
             y: "0%",
-            duration: 1,
-            stagger: 0.075,
+            duration: 0.5,
+            stagger: 0.04,
           },
-          index * 1
+          index * 0.5
         );
 
         if (index < counts.length) {
@@ -69,10 +69,10 @@ export default function Home() {
             digits,
             {
               y: "-120%",
-              duration: 1,
-              stagger: 0.075,
+              duration: 0.5,
+              stagger: 0.04,
             },
-            index * 1 + 1
+            index * 0.5 + 0.5
           );
         }
 
@@ -80,10 +80,10 @@ export default function Home() {
           progressBar,
           {
             scaleY: (index + 1) / counts.length,
-            duration: 1,
+            duration: 0.5,
             ease: "hop",
           },
-          index * 1
+          index * 0.5
         );
       });
 
@@ -93,12 +93,12 @@ export default function Home() {
         })
         .to(progressBar, {
           scaleY: 0,
-          duration: 0.75,
+          duration: 0.4,
           ease: "hop",
         })
         .to(preloaderOverlay, {
           opacity: 0,
-          duration: 0.3,
+          duration: 0.2,
           ease: "power2.out",
           onComplete: () => {
             preloaderOverlay.style.display = "none";
@@ -195,7 +195,7 @@ export default function Home() {
           <div className="hero-header">
             <div className="hero-header-col-lg"></div>
             <div className="hero-header-col-sm">
-              <Copy animateOnScroll={false} delay={showPreloader ? 6.2 : 0.9}>
+              <Copy animateOnScroll={false} delay={showPreloader ? 3.5 : 0.9}>
                 <h3>
                   Delivering custom AI and interactive solutions that bring your
                   vision to life with impact.
@@ -206,14 +206,14 @@ export default function Home() {
 
           <div className="hero-footer">
             <div className="hero-footer-col-lg">
-              <Copy animateOnScroll={false} delay={showPreloader ? 6.2 : 0.9}>
+              <Copy animateOnScroll={false} delay={showPreloader ? 3.5 : 0.9}>
                 <p className="sm caps mono">Enigma</p>
                 <p className="sm caps mono">Based in Riyadh, Saudi Arabia</p>
               </Copy>
             </div>
             <div className="hero-footer-col-sm">
               <div className="hero-tags">
-                <Copy animateOnScroll={false} delay={showPreloader ? 6.2 : 0.9}>
+                <Copy animateOnScroll={false} delay={showPreloader ? 3.5 : 0.9}>
                   <p className="sm caps mono">AI-Powered Experiences</p>
                   <p className="sm caps mono">Custom Interactive Systems</p>
                   <p className="sm caps mono">Creative Development</p>
@@ -232,6 +232,12 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="how-we-work-container">
+        <div className="container">
+          <HowWeWork />
+        </div>
+      </section>
+
       <WhoWeAre />
 
       <section className="mission-intro">
@@ -245,44 +251,30 @@ export default function Home() {
                 guided by systems, and shaped through close collaboration.
               </h3> */}
               <h3>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                euismod, nunc ut sollicitudin malesuada, nunc nisl aliquam
-                mauris, eget aliquam nisl nunc euismod nunc. Lorem ipsum dolor
-                sit amet, consectetur adipiscing elit. Sed euismod, nunc ut
+                We here at Enigma focuse on building intelligent, scalable
+                products that connect technology with real business needs. We
+                combine strategy, design, and engineering to create solutions
+                that are purposeful, adaptable, and built to perform in
+                fast-moving markets.
               </h3>
               <br />
-              {/* <h3>
-                With a focus on design and development, we build scalable
-                solutions that reflect quiet precision and long-term value.
-                Every project is an exercise in restraint, intention, and
-                technical care.
-              </h3> */}
               <h3>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                euismod, nunc ut sollicitudin malesuada, nunc nisl aliquam
-                mauris, eget aliquam nisl nunc euismod nunc. Lorem ipsum dolor
-                sit amet, consectetur adipiscing elit. Sed euismod,
+                Below is a selection of our ready projects, representing the
+                products gaining the most traction today. These solutions are
+                live, tested, and shaped by real user demand. What you see here
+                highlights what’s trending now, with deeper insights and full
+                project details explored in the next section.
               </h3>
             </Copy>
 
             <div className="mission-link">
-              <BtnLink
-                // route="/work"
-                label="View Work"
-                dark
-              />
+              <BtnLink label="View Work" dark disabled arrowDown />
             </div>
           </div>
         </div>
       </section>
 
       <ProcessCards />
-
-      <section className="how-we-work-container">
-        <div className="container">
-          <HowWeWork />
-        </div>
-      </section>
 
       <Footer />
     </>
