@@ -10,16 +10,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useViewTransition } from "@/hooks/useViewTransition";
 import Copy from "../Copy/Copy";
 
-import { RiLinkedinBoxLine } from "react-icons/ri";
-import { RiInstagramLine } from "react-icons/ri";
-import { RiDribbbleLine } from "react-icons/ri";
-import { RiYoutubeLine } from "react-icons/ri";
+import { IoIosMail, IoLogoLinkedin, IoLogoWhatsapp } from "react-icons/io";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
   const { navigateWithTransition } = useViewTransition();
   const socialIconsRef = useRef(null);
+  const contactIconsRef = useRef(null);
 
   useGSAP(
     () => {
@@ -44,81 +42,67 @@ const Footer = () => {
     { scope: socialIconsRef }
   );
 
+  useGSAP(
+    () => {
+      if (!contactIconsRef.current) return;
+
+      const icons = contactIconsRef.current.querySelectorAll(".icon");
+      gsap.set(icons, { opacity: 0, x: -40 });
+
+      ScrollTrigger.create({
+        trigger: contactIconsRef.current,
+        start: "top 90%",
+        once: true,
+        animation: gsap.to(icons, {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+        }),
+      });
+    },
+    { scope: contactIconsRef }
+  );
+
   return (
-    <div className="footer">
+    <div id="contact" className="footer">
       <div className="footer-meta">
         <div className="container footer-meta-header">
           <div className="footer-meta-col">
             <div className="footer-meta-block">
               <div className="footer-meta-logo">
                 <Copy delay={0.1}>
-                  <h3 className="lg">enigma</h3>
+                  <h3 className="lg">Let's Connect</h3>
                 </Copy>
               </div>
               <Copy delay={0.2}>
-                <h2>When AI Meets Entertainment</h2>
+                <h2>Ready to Bring Your Vision to Life?</h2>
               </Copy>
+              <div className="footer-contact" ref={contactIconsRef}>
+                <div className="footer-socials-wrapper">
+                  <a
+                    href="https://www.linkedin.com/company/enigma-ai-company/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="icon"
+                  >
+                    <IoLogoLinkedin />
+                  </a>
+                  <a
+                    href="https://wa.me/+966543799104"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="icon"
+                  >
+                    <IoLogoWhatsapp />
+                  </a>
+                  <a href="mailto:contact@enigma-ai.co" className="icon">
+                    <IoIosMail />
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="footer-meta-col">
-            {/* <div className="footer-nav-links">
-              <Copy delay={0.1}>
-                <a
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/");
-                  }}
-                >
-                  <h3>Index</h3>
-                </a>
-                <a
-                  href="/studio"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/studio");
-                  }}
-                >
-                  <h3>Studio</h3>
-                </a>
-                <a
-                  href="/spaces"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/spaces");
-                  }}
-                >
-                  <h3>Our Spaces</h3>
-                </a>
-                <a
-                  href="/sample-space"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/sample-space");
-                  }}
-                >
-                  <h3>One Installation</h3>
-                </a>
-                <a
-                  href="/blueprints"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/blueprints");
-                  }}
-                >
-                  <h3>Blueprints</h3>
-                </a>
-                <a
-                  href="/connect"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/connect");
-                  }}
-                >
-                  <h3>Connect</h3>
-                </a>
-              </Copy>
-            </div> */}
           </div>
         </div>
       </div>
@@ -131,7 +115,6 @@ const Footer = () => {
             <p>
               Developed by — <span>enigma</span>
             </p>
-            <p>This website is using cookies.</p>
             <p>All rights reserverd &copy; 2025</p>
           </div>
         </div>

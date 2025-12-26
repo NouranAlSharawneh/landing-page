@@ -57,9 +57,18 @@ const BtnLink = ({
       return;
     }
     e.preventDefault();
-    router.push(route, {
-      onTransitionReady: slideInOut,
-    });
+
+    // Check if it's an anchor link (starts with #)
+    if (route && route.startsWith('#')) {
+      const element = document.querySelector(route);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      router.push(route, {
+        onTransitionReady: slideInOut,
+      });
+    }
   };
 
   return (

@@ -223,7 +223,7 @@ export default function Home() {
 
               <div className="hero-link">
                 <BtnLink
-                  // route="/contact"
+                  route="#contact"
                   label="contact"
                 />
               </div>
