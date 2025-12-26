@@ -16,6 +16,7 @@ import Footer from "@/components/Footer/Footer";
 import HowWeWork from "@/components/HowWeWork/HowWeWork";
 import PixelTransition from "@/components/PixelTransition/PixelTransition";
 import InnovateSection from "@/components/InnovateSection/InnovateSection";
+import TrustedCompanies from "@/components/TrustedCompanies/TrustedCompanies";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create("hop", "0.9, 0, 0.1, 1");
@@ -224,15 +225,14 @@ export default function Home() {
               </div>
 
               <div className="hero-link">
-                <BtnLink
-                  route="#contact"
-                  label="contact"
-                />
+                <BtnLink route="#contact" label="contact" />
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <TrustedCompanies />
 
       <InnovateSection />
 
@@ -251,11 +251,6 @@ export default function Home() {
         <div className="mission-intro-col-lg">
           <div className="mission-intro-copy">
             <Copy>
-              {/* <h3>
-                We are a digital studio dedicated to creating clear and
-                purposeful online experiences. Our work is rooted in structure,
-                guided by systems, and shaped through close collaboration.
-              </h3> */}
               <h3>
                 We here at Enigma focuse on building intelligent, scalable
                 products that connect technology with real business needs. We
