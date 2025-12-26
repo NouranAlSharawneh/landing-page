@@ -10,15 +10,15 @@ export default function ClientLayout({ children }) {
 
   const scrollSettings = isMobile
     ? {
-        duration: 1,
+        duration: 1.3,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: "vertical",
         gestureDirection: "vertical",
         smooth: true,
         smoothTouch: true,
-        touchMultiplier: 1.5,
+        touchMultiplier: 0.8,
         infinite: false,
-        lerp: 0.05,
+        lerp: 0.1,
         wheelMultiplier: 1,
         orientation: "vertical",
         smoothWheel: true,

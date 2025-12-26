@@ -18,6 +18,7 @@ const Footer = () => {
   const { navigateWithTransition } = useViewTransition();
   const socialIconsRef = useRef(null);
   const contactIconsRef = useRef(null);
+  const textLogoRef = useRef(null);
 
   useGSAP(
     () => {
@@ -51,7 +52,7 @@ const Footer = () => {
 
       ScrollTrigger.create({
         trigger: contactIconsRef.current,
-        start: "top 90%",
+        start: "top 80%",
         once: true,
         animation: gsap.to(icons, {
           opacity: 1,
@@ -63,6 +64,27 @@ const Footer = () => {
       });
     },
     { scope: contactIconsRef }
+  );
+
+  useGSAP(
+    () => {
+      if (!textLogoRef.current) return;
+
+      gsap.set(textLogoRef.current, { opacity: 0, y: 80 });
+
+      ScrollTrigger.create({
+        trigger: textLogoRef.current,
+        start: "top 90%",
+        once: true,
+        animation: gsap.to(textLogoRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        }),
+      });
+    },
+    { scope: textLogoRef }
   );
 
   return (
@@ -109,7 +131,7 @@ const Footer = () => {
       <div className="footer-outro">
         <div className="container">
           <div className="footer-header">
-            <img src="images/logos/textLogo.svg" alt="" />
+            <img ref={textLogoRef} src="images/logos/textLogo.svg" alt="" />
           </div>
           <div className="footer-copyright">
             <p>
