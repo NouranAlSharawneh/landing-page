@@ -21,7 +21,9 @@ const nm = localFont({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://enigma-ai.co"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://enigma-ai.co"
+  ),
   title:
     "Enigma | AI-Powered Interactive Solutions & Custom Development in Riyadh",
   description:
@@ -110,8 +112,8 @@ export const metadata = {
     images: [
       {
         url: "/images/seo.png",
-        width: 1200,
-        height: 630,
+        width: 824,
+        height: 489,
         alt: "Enigma - AI-Powered Interactive Solutions",
       },
     ],

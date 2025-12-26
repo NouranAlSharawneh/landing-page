@@ -23,25 +23,25 @@ const HowWeWork = () => {
   const steps = [
     {
       title: "Discovery / Insight",
-      image: "images/howWeWork/howWeWork2.png",
+      image: "images/howWeWork/howWeWork2.jpg",
       description:
         "We start by understanding your vision, users, and business context. Through workshops, research, and data analysis, we uncover opportunities and define clear objectives for a solution built around your needs.",
     },
     {
       title: "Strategy / Architecture",
-      image: "images/howWeWork/howWeWork3.png",
+      image: "images/howWeWork/howWeWork3.jpg",
       description:
         "We translate insights into a clear strategy and technical direction. User flows, system architecture, and AI opportunities are mapped to ensure scalability, performance, and long-term value.",
     },
     {
       title: "Design / Development",
-      image: "images/howWeWork/howWeWork1.png",
+      image: "images/howWeWork/howWeWork1.jpg",
       description:
         "Our teams design intuitive interfaces and build robust systems in parallel. Prototypes are tested, refined, and engineered using technologies chosen specifically for your solution.",
     },
     {
       title: "Launch / Optimization",
-      image: "images/howWeWork/howWeWork4.png",
+      image: "images/howWeWork/howWeWork4.jpg",
       description:
         "We deploy with confidence and monitor performance closely. Continuous optimization, iteration, and support ensure your solution evolves with your users and business goals.",
     },
