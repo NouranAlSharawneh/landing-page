@@ -30,7 +30,8 @@ export default function PixelTransition() {
         trigger: containerRef.current,
         start: "top bottom",
         end: "bottom top",
-        scrub: 1,
+        scrub: 1.5,
+        invalidateOnRefresh: false,
       },
     });
 

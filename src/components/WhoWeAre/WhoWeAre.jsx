@@ -21,7 +21,8 @@ const WhoWeAre = () => {
       trigger: ".whoweare",
       start: "top bottom",
       end: `bottom+=${window.innerHeight * 2} top`,
-      scrub: 1,
+      scrub: 1.5,
+      invalidateOnRefresh: false,
       onUpdate: (self) => {
         const progress = self.progress;
         const clipPathValue = Math.min(progress * 100, 100);
@@ -43,9 +44,9 @@ const WhoWeAre = () => {
       end: `+=${window.innerHeight * 6}`,
       pin: true,
       pinSpacing: true,
-      scrub: 1,
+      scrub: 1.5,
       anticipatePin: 0.5,
-      invalidateOnRefresh: true,
+      invalidateOnRefresh: false,
       onUpdate: (self) => {
         const progress = self.progress;
 

@@ -2,11 +2,8 @@
 import "./TrustedCompanies.css";
 import Image from "next/image";
 import Copy from "@/components/Copy/Copy";
-import { useState } from "react";
 
 const TrustedCompanies = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
   const companies = [
     {
       name: "Center of Digital Entrepreneurship",
@@ -59,24 +56,25 @@ const TrustedCompanies = () => {
       <div className="marquee-container">
         <div className="marquee-track">
           {duplicatedCompanies.map((company, index) => (
-            <div
-              key={index}
-              className="marquee-item"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <Image
-                src={
-                  hoveredIndex === index
-                    ? company.coloredLogo
-                    : company.whiteLogo
-                }
-                alt={company.name}
-                width={200}
-                height={100}
-                loading="lazy"
-                className="marquee-logo"
-              />
+            <div key={index} className="marquee-item">
+              <div className="marquee-logo-container">
+                <Image
+                  src={company.whiteLogo}
+                  alt={company.name}
+                  width={200}
+                  height={80}
+                  loading="eager"
+                  className="marquee-logo marquee-logo-white"
+                />
+                <Image
+                  src={company.coloredLogo}
+                  alt={company.name}
+                  width={200}
+                  height={80}
+                  loading="eager"
+                  className="marquee-logo marquee-logo-colored"
+                />
+              </div>
             </div>
           ))}
         </div>

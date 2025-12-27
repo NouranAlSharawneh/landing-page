@@ -283,8 +283,8 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
           return;
         }
 
-        // Throttle to 30fps when not interacting to reduce CPU usage
-        const fps = execCountRef.current > 0 ? 60 : 30;
+        // Throttle to 20fps when not interacting to reduce CPU usage
+        const fps = execCountRef.current > 0 ? 60 : 20;
         const frameInterval = 1000 / fps;
         const elapsed = currentTime - lastFrameTimeRef.current;
 

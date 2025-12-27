@@ -54,6 +54,8 @@
 
 .hero-link {
   pointer-events: auto;
+  width: fit-content;
+  align-self: flex-end;
 }
 
 .preloader-overlay {
@@ -123,6 +125,7 @@
   display: flex;
   align-items: center;
   gap: 3rem;
+  content-visibility: auto;
 }
 
 .mission-intro-col-sm {
@@ -152,6 +155,7 @@
   margin-top: -1px;
   background-color: var(--background);
   color: white;
+  content-visibility: auto;
 }
 
 .how-we-work-container .container {

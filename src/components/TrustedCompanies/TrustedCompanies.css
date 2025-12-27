@@ -27,7 +27,6 @@
   gap: 4rem;
   animation: marquee 30s linear infinite;
   width: fit-content;
-  transition: animation-play-state 0.4s ease;
 }
 
 .marquee-item {
@@ -40,18 +39,46 @@
   cursor: pointer;
 }
 
+.marquee-logo-container {
+  position: relative;
+  width: 200px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .marquee-track:hover {
   animation-play-state: paused;
 }
 
 .marquee-logo {
-  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: auto !important;
   height: auto !important;
   max-width: 200px;
-  max-height: 100px;
+  max-height: 70px;
   object-fit: contain;
-  transition: all 0.4s ease;
+  transition: opacity 0.3s ease;
+}
+
+.marquee-logo-white {
+  opacity: 1;
+}
+
+.marquee-logo-colored {
+  opacity: 0;
+}
+
+.marquee-item:hover .marquee-logo-white {
+  opacity: 0;
+}
+
+.marquee-item:hover .marquee-logo-colored {
+  opacity: 1;
 }
 
 @keyframes marquee {
@@ -77,6 +104,11 @@
     min-width: 180px;
   }
 
+  .marquee-logo-container {
+    width: 180px;
+    height: 80px;
+  }
+
   .marquee-logo {
     max-width: 180px;
     max-height: 80px;
@@ -96,6 +128,11 @@
   .marquee-item {
     padding: 1rem;
     min-width: 150px;
+  }
+
+  .marquee-logo-container {
+    width: 150px;
+    height: 70px;
   }
 
   .marquee-logo {
