@@ -262,7 +262,6 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
         vertexCount: validParticles.length,
       };
 
-      console.log(`Created ${validParticles.length} particles`);
       startAnimation();
     }
 

@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import ClientLayout from "@/client-layout";
+import ConsoleEasterEgg from "@/components/ConsoleEasterEgg";
 
 import { ViewTransitions } from "next-view-transitions";
 import { DM_Mono } from "next/font/google";
@@ -260,6 +261,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <ConsoleEasterEgg />
         <ViewTransitions>
           <ClientLayout>{children}</ClientLayout>
         </ViewTransitions>

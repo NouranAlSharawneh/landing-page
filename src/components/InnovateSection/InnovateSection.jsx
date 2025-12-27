@@ -69,12 +69,12 @@ const InnovateSection = () => {
     // Fade in header elements
     gsap.from(".innovate-eyebrow-wrap, .innovate-heading", {
       opacity: 0,
-      y: 30,
+      y: 40,
       duration: 1,
       stagger: 0.2,
       scrollTrigger: {
         trigger: section,
-        start: "top 95%",
+        start: "top 90%",
         once: true,
       },
     });

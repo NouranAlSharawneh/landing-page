@@ -1,6 +1,7 @@
 "use client";
 import "./home.css";
 import { useState, useEffect } from "react";
+import { useLenis } from "lenis/react";
 
 import DynamicBackground from "@/components/DynamicBackground/DynamicBackground";
 import Copy from "@/components/Copy/Copy";
@@ -25,12 +26,21 @@ let isInitialLoad = true;
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(isInitialLoad);
+  const lenis = useLenis();
 
   useEffect(() => {
     return () => {
       isInitialLoad = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (showPreloader && lenis) {
+      lenis.stop();
+    } else if (!showPreloader && lenis) {
+      lenis.start();
+    }
+  }, [showPreloader, lenis]);
 
   useGSAP(() => {
     const heroLink = document.querySelector(".hero-link");
@@ -105,6 +115,7 @@ export default function Home() {
           ease: "power2.out",
           onComplete: () => {
             preloaderOverlay.style.display = "none";
+            setShowPreloader(false);
           },
         });
     }

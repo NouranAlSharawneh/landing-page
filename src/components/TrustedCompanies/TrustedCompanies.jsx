@@ -2,6 +2,7 @@
 import "./TrustedCompanies.css";
 import Image from "next/image";
 import Copy from "@/components/Copy/Copy";
+import React from "react";
 
 const TrustedCompanies = () => {
   const companies = [
@@ -83,4 +84,4 @@ const TrustedCompanies = () => {
   );
 };
 
-export default TrustedCompanies;
+export default React.memo(TrustedCompanies);
