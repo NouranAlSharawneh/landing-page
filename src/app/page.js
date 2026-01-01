@@ -18,6 +18,7 @@ import HowWeWork from "@/components/HowWeWork/HowWeWork";
 import PixelTransition from "@/components/PixelTransition/PixelTransition";
 import InnovateSection from "@/components/InnovateSection/InnovateSection";
 import TrustedCompanies from "@/components/TrustedCompanies/TrustedCompanies";
+import ComingSoonReveal from "@/components/ComingSoonReveal/ComingSoonReveal";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create("hop", "0.9, 0, 0.1, 1");
@@ -263,19 +264,13 @@ export default function Home() {
           <div className="mission-intro-copy">
             <Copy>
               <h3>
-                We here at Enigma focuse on building intelligent, scalable
-                products that connect technology with real business needs. We
-                combine strategy, design, and engineering to create solutions
-                that are purposeful, adaptable, and built to perform in
-                fast-moving markets.
+                We build intelligent, scalable products that merge strategy,
+                design, and engineering to solve real business challenges.
               </h3>
               <br />
               <h3>
-                Below is a selection of our ready projects, representing the
-                products gaining the most traction today. These solutions are
-                live, tested, and shaped by real user demand. What you see here
-                highlights what’s trending now, with deeper insights and full
-                project details explored in the next section.
+                Featured below: our live, market-tested solutions gaining real
+                traction today.
               </h3>
             </Copy>
 
@@ -289,6 +284,8 @@ export default function Home() {
       <div id="work">
         <ProcessCards />
       </div>
+
+      <ComingSoonReveal />
 
       <PixelTransition />
 

@@ -1,0 +1,90 @@
+.coming-soon-reveal {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  background-color: var(--foreground);
+  overflow: hidden;
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.coming-soon-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coming-soon-text-left,
+.coming-soon-text-right {
+  position: absolute;
+  font-size: clamp(1.5rem, 4vw, 5rem);
+  font-weight: 900;
+  color: var(--background);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+  z-index: 2;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.coming-soon-text-left {
+  transform-origin: right center;
+  left: 50%;
+  transform: translateX(calc(-100% - 0.3rem)) translateZ(0);
+}
+
+.coming-soon-text-right {
+  transform-origin: left center;
+  left: 50%;
+  transform: translateX(0.3rem) translateZ(0);
+}
+
+.coming-soon-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.coming-soon-image img {
+  object-position: center;
+}
+
+.divider {
+  height: 30vh;
+  background-color: var(--foreground);
+}
+
+/* Tablet and mobile styles */
+@media (max-width: 1000px) {
+  .coming-soon-text-left,
+  .coming-soon-text-right {
+    font-size: clamp(1.25rem, 3.5vw, 4rem);
+  }
+
+  .divider {
+    height: 20vh;
+    background-color: var(--foreground);
+  }
+}
+
+@media (max-width: 600px) {
+  .coming-soon-text-left,
+  .coming-soon-text-right {
+    font-size: clamp(1rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+  }
+}
