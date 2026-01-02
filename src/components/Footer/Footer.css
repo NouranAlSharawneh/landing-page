@@ -160,4 +160,8 @@
   .footer-copyright p:nth-child(2) {
     text-align: left;
   }
+
+  .footer .footer-contact-info {
+    margin-bottom: 2rem;
+  }
 }
