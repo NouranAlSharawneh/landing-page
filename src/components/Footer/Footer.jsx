@@ -124,6 +124,17 @@ const Footer = () => {
                     <IoIosMail />
                   </a>
                 </div>
+                <div className="footer-contact-info">
+                  <a href="tel:+966543799104" className="contact-item">
+                    +966 54 379 9104
+                  </a>
+                  <a
+                    href="mailto:contact@enigma-ai.co"
+                    className="contact-item"
+                  >
+                    contact@enigma-ai.co
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -132,7 +143,12 @@ const Footer = () => {
       <div className="footer-outro">
         <div className="container">
           <div className="footer-header" ref={textLogoRef}>
-            <Image src="/images/logos/textLogo.svg" alt="Enigma Logo" width={200} height={50} />
+            <Image
+              src="/images/logos/textLogo.svg"
+              alt="Enigma Logo"
+              width={200}
+              height={50}
+            />
           </div>
           <div className="footer-copyright">
             <p>

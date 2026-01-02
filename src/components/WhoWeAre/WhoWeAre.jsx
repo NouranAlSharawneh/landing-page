@@ -12,15 +12,20 @@ const WhoWeAre = () => {
     const whoweareScroll = document.querySelector(".whoweare-scroll");
     const containerWidth = whoweareScroll.offsetWidth;
     const viewportWidth = window.innerWidth;
+    const isMobile = window.innerWidth <= 768;
 
     const maxTranslateX = containerWidth - viewportWidth;
     const targetProgress = 1;
     const maxTranslateAtTarget = maxTranslateX / targetProgress;
 
+    // Adjust scroll distances for mobile
+    const clipPathScrollMultiplier = isMobile ? 1 : 2;
+    const pinScrollMultiplier = isMobile ? 3 : 6;
+
     ScrollTrigger.create({
       trigger: ".whoweare",
       start: "top bottom",
-      end: `bottom+=${window.innerHeight * 2} top`,
+      end: `bottom+=${window.innerHeight * clipPathScrollMultiplier} top`,
       scrub: 1.5,
       invalidateOnRefresh: false,
       onUpdate: (self) => {
@@ -41,7 +46,7 @@ const WhoWeAre = () => {
     ScrollTrigger.create({
       trigger: ".whoweare",
       start: "top top",
-      end: `+=${window.innerHeight * 6}`,
+      end: `+=${window.innerHeight * pinScrollMultiplier}`,
       pin: true,
       pinSpacing: true,
       scrub: 1.5,

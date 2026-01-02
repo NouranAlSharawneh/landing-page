@@ -69,8 +69,8 @@ const ComingSoonReveal = () => {
     <>
       <section className="coming-soon-reveal">
         <div className="coming-soon-content">
-          <h1 className="coming-soon-text-left">Trending</h1>
-          <h1 className="coming-soon-text-right">Product</h1>
+          <h1 className="coming-soon-text-left">Many</h1>
+          <h1 className="coming-soon-text-right">More</h1>
           <div className="coming-soon-image">
             <Image
               src="/images/enigmaPhotobooth.jpeg"

@@ -51,7 +51,7 @@ export default function Home() {
 
     if (showPreloader) {
       const tl = gsap.timeline({
-        delay: 0.2,
+        delay: 0.1,
         defaults: {
           ease: "hop",
         },
@@ -62,7 +62,7 @@ export default function Home() {
       const preloaderOverlay = document.querySelector(".preloader-overlay");
 
       const progressTl = gsap.timeline({
-        delay: 0.2,
+        delay: 0.1,
       });
 
       counts.forEach((count, index) => {
@@ -72,10 +72,10 @@ export default function Home() {
           digits,
           {
             y: "0%",
-            duration: 0.5,
-            stagger: 0.04,
+            duration: 0.25,
+            stagger: 0.02,
           },
-          index * 0.5
+          index * 0.25
         );
 
         if (index < counts.length) {
@@ -83,10 +83,10 @@ export default function Home() {
             digits,
             {
               y: "-120%",
-              duration: 0.5,
-              stagger: 0.04,
+              duration: 0.25,
+              stagger: 0.02,
             },
-            index * 0.5 + 0.5
+            index * 0.25 + 0.25
           );
         }
 
@@ -94,10 +94,10 @@ export default function Home() {
           progressBar,
           {
             scaleY: (index + 1) / counts.length,
-            duration: 0.5,
+            duration: 0.25,
             ease: "hop",
           },
-          index * 0.5
+          index * 0.25
         );
       });
 
@@ -107,12 +107,12 @@ export default function Home() {
         })
         .to(progressBar, {
           scaleY: 0,
-          duration: 0.4,
+          duration: 0.2,
           ease: "hop",
         })
         .to(preloaderOverlay, {
           opacity: 0,
-          duration: 0.2,
+          duration: 0.1,
           ease: "power2.out",
           onComplete: () => {
             preloaderOverlay.style.display = "none";
@@ -167,14 +167,7 @@ export default function Home() {
                 <h1>0</h1>
               </div>
             </div>
-            <div className="count">
-              <div className="digit">
-                <h1>2</h1>
-              </div>
-              <div className="digit">
-                <h1>7</h1>
-              </div>
-            </div>
+
             <div className="count">
               <div className="digit">
                 <h1>6</h1>
@@ -210,7 +203,7 @@ export default function Home() {
           <div className="hero-header">
             <div className="hero-header-col-lg"></div>
             <div className="hero-header-col-sm">
-              <Copy animateOnScroll={false} delay={showPreloader ? 3.5 : 0.9}>
+              <Copy animateOnScroll={false} delay={showPreloader ? 3.0 : 0.9}>
                 <h3>
                   Delivering custom AI and interactive solutions that bring your
                   vision to life with impact.
@@ -232,7 +225,6 @@ export default function Home() {
                   <p className="sm caps mono">AI-Powered Experiences</p>
                   <p className="sm caps mono">Custom Interactive Systems</p>
                   <p className="sm caps mono">Creative Development</p>
-                  <p className="sm caps mono">Smart Product Development</p>
                 </Copy>
               </div>
 
@@ -275,7 +267,7 @@ export default function Home() {
             </Copy>
 
             <div className="mission-link">
-              <BtnLink label="View Work" dark disabled arrowDown />
+              <BtnLink label="Some of our products" dark disabled arrowDown />
             </div>
           </div>
         </div>

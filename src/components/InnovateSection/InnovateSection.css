@@ -190,9 +190,21 @@
 }
 
 @media (max-width: 600px) {
+  .innovate-wrap {
+    padding: 0rem 1rem 3rem 1rem;
+  }
+
   .innovate-eyebrow-marker {
     width: 6px;
     height: 6px;
+  }
+
+  .innovate-content {
+    height: 90vh;
+  }
+
+  .innovate-inner {
+    height: 90vh;
   }
 
   .innovate-text {

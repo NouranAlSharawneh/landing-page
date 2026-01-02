@@ -14,8 +14,10 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
   const execCountRef = useRef(0);
   const isCleanedUpRef = useRef(false);
   const isMobileRef = useRef(false);
-  const isVisibleRef = useRef(true);
+  const isVisibleRef = useRef(false);
   const lastFrameTimeRef = useRef(0);
+  const hasTriggeredSplashRef = useRef(false);
+  const observerHasRunRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -396,6 +398,84 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
       animate();
     }
 
+    const triggerInitialSplash = () => {
+      if (isCleanedUpRef.current || hasTriggeredSplashRef.current) {
+        return;
+      }
+
+      hasTriggeredSplashRef.current = true;
+
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+
+      // Diagonal swipe from top-left to bottom-right
+      const startX = -300;
+      const startY = -300;
+      const endX = canvasWidth + 300;
+      const endY = canvasHeight + 300;
+
+      const duration = 2000; // 2 seconds for maximum visibility
+      const startTime = performance.now();
+
+      // Create perpendicular offsets for ultra-thick diagonal band
+      // These offsets are perpendicular to the diagonal line
+      const numOffsets = 25; // Number of parallel lines to create thickness
+      const offsetDistance = 80; // Distance between parallel lines
+      const perpendicularOffsets = [];
+
+      for (let i = 0; i < numOffsets; i++) {
+        // Offset perpendicular to diagonal (at 90 degrees to the diagonal)
+        // Diagonal goes from top-left to bottom-right (slope = 1)
+        // Perpendicular slope = -1
+        const centerOffset = (i - numOffsets / 2) * offsetDistance;
+        perpendicularOffsets.push(centerOffset);
+      }
+
+      let offsetIndex = 0;
+
+      function animateDiagonalWave(currentTime) {
+        if (isCleanedUpRef.current) return;
+
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease out cubic for smooth, impressive deceleration
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+        // Calculate current position on the diagonal
+        const baseX = startX + (endX - startX) * easeProgress;
+        const baseY = startY + (endY - startY) * easeProgress;
+
+        // Apply multiple perpendicular offsets per frame for ultra-thick band
+        // Perpendicular to diagonal means: if we move +1 in X, we move -1 in Y
+        // Reduced from 8 to 4 iterations for better performance
+        for (let i = 0; i < 4; i++) {
+          offsetIndex = (offsetIndex + 1) % perpendicularOffsets.length;
+          const offset = perpendicularOffsets[offsetIndex];
+
+          const angle = Math.PI * 0.75; // 135 degrees (perpendicular to 45-degree diagonal)
+          const offsetX = offset * Math.cos(angle);
+          const offsetY = offset * Math.sin(angle);
+
+          mouseRef.current.x = baseX + offsetX;
+          mouseRef.current.y = baseY + offsetY;
+        }
+
+        if (execCountRef.current < 150) {
+          execCountRef.current = 600;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(animateDiagonalWave);
+        } else {
+          // Cleanup
+          execCountRef.current = Math.min(execCountRef.current, 200);
+        }
+      }
+
+      requestAnimationFrame(animateDiagonalWave);
+    };
+
     const handleMouseMove = (event) => {
       if (isCleanedUpRef.current) return;
 
@@ -483,7 +563,20 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const wasVisible = isVisibleRef.current;
           isVisibleRef.current = entry.isIntersecting;
+          observerHasRunRef.current = true;
+
+          // Trigger splash when first becoming visible
+          if (
+            entry.isIntersecting &&
+            !wasVisible &&
+            !hasTriggeredSplashRef.current
+          ) {
+            setTimeout(() => {
+              triggerInitialSplash();
+            }, 2500); // Wait 1.5s so user can actually SEE the full animation
+          }
         });
       },
       { threshold: 0.1 }

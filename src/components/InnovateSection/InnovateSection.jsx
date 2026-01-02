@@ -22,7 +22,7 @@ const InnovateSection = () => {
         const topText = texts[0];
         const bottomText = texts[1];
         const isMobile = window.innerWidth <= 600;
-        const yMovement = index * (isMobile ? 90 : 70); // Bigger movement on mobile
+        const yMovement = index * (isMobile ? 60 : 70);
 
         // TOP text - moves DOWN
         gsap.fromTo(
