@@ -1,6 +1,7 @@
 "use client";
 import "./WhoWeAre.css";
 
+import React from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -94,4 +95,4 @@ const WhoWeAre = () => {
   );
 };
 
-export default WhoWeAre;
+export default React.memo(WhoWeAre);

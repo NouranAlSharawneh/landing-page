@@ -1,5 +1,6 @@
 "use client";
 import "./ProcessCards.css";
+import React from "react";
 import Image from "next/image";
 
 import { useGSAP } from "@gsap/react";
@@ -112,4 +113,4 @@ const ProcessCards = () => {
   );
 };
 
-export default ProcessCards;
+export default React.memo(ProcessCards);

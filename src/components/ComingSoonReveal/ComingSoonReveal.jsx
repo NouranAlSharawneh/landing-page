@@ -1,5 +1,6 @@
 "use client";
 import "./ComingSoonReveal.css";
+import React from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -89,4 +90,4 @@ const ComingSoonReveal = () => {
   );
 };
 
-export default ComingSoonReveal;
+export default React.memo(ComingSoonReveal);

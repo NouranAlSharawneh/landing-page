@@ -27,6 +27,7 @@
   gap: 4rem;
   animation: marquee 30s linear infinite;
   width: fit-content;
+  will-change: transform;
 }
 
 .marquee-item {

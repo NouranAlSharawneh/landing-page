@@ -1,5 +1,7 @@
 "use client";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { debounce } from "@/utils/debounce";
+import { rafThrottle } from "@/utils/throttle";
 
 const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
   const canvasRef = useRef(null);
@@ -548,16 +550,24 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
       }
     };
 
+    // Throttle mouse/touch events with RAF for better performance
+    const throttledMouseMove = rafThrottle(handleMouseMove);
+    const throttledTouchStart = rafThrottle(handleTouchStart);
+    const throttledTouchMove = rafThrottle(handleTouchMove);
+
     if (!isMobileRef.current) {
-      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mousemove", throttledMouseMove);
     } else {
-      canvas.addEventListener("touchstart", handleTouchStart, {
+      canvas.addEventListener("touchstart", throttledTouchStart, {
         passive: true,
       });
-      canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+      canvas.addEventListener("touchmove", throttledTouchMove, { passive: false });
       canvas.addEventListener("touchend", handleTouchEnd, { passive: true });
     }
-    window.addEventListener("resize", handleResize);
+
+    // Debounce resize handler to improve performance
+    const debouncedResize = debounce(handleResize, 200);
+    window.addEventListener("resize", debouncedResize);
 
     // Add Intersection Observer to pause animation when not visible
     const observer = new IntersectionObserver(
@@ -595,13 +605,13 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
       }
 
       if (!isMobileRef.current) {
-        document.removeEventListener("mousemove", handleMouseMove);
+        document.removeEventListener("mousemove", throttledMouseMove);
       } else {
-        canvas.removeEventListener("touchstart", handleTouchStart);
-        canvas.removeEventListener("touchmove", handleTouchMove);
+        canvas.removeEventListener("touchstart", throttledTouchStart);
+        canvas.removeEventListener("touchmove", throttledTouchMove);
         canvas.removeEventListener("touchend", handleTouchEnd);
       }
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", debouncedResize);
 
       observer.disconnect();
 
@@ -659,4 +669,4 @@ const DynamicBackground = ({ logoPath = "/images/logos/whiteFavicon.png" }) => {
   );
 };
 
-export default DynamicBackground;
+export default React.memo(DynamicBackground);

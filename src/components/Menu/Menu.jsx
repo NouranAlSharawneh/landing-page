@@ -1,6 +1,6 @@
 "use client";
 import "./Menu.css";
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 
 import { useTransitionRouter } from "next-view-transitions";
 import gsap from "gsap";
@@ -145,87 +145,7 @@ const Menu = ({ onMenuStateChange }) => {
     return exactCurrentPath === path;
   };
 
-  const navigateTo = (path) => {
-    closeMenu();
-
-    setTimeout(() => {
-      const targetElement = document.querySelector(path);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }, 600);
-  };
-
-  const openMenu = () => {
-    if (isAnimating) return;
-
-    onMenuStateChange?.(true);
-
-    menuOverlayRef.current.style.pointerEvents = "all";
-
-    setIsAnimating(true);
-    const tl = gsap.timeline({
-      onComplete: () => setIsAnimating(false),
-    });
-
-    tl.to(menuBtnRef.current, {
-      y: "-100%",
-      duration: 0.5,
-      ease: "power3.out",
-      onComplete: () => {
-        navRef.current.style.pointerEvents = "none";
-        gsap.set(menuBtnRef.current, { y: "100%" });
-      },
-    });
-
-    tl.to(
-      menuOverlayRef.current,
-      {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power3.out",
-      },
-      "-=0.45"
-    );
-
-    tl.to(
-      closeBtnRef.current,
-      {
-        y: "0%",
-        duration: 1,
-        ease: "power3.out",
-      },
-      "-=0.5"
-    );
-
-    tl.to(
-      ".menu-overlay-items .revealer a",
-      {
-        y: "0%",
-        duration: 1,
-        stagger: 0.075,
-        ease: "power3.out",
-      },
-      "<"
-    );
-
-    tl.to(
-      ".menu-footer .revealer p, .menu-footer .revealer a",
-      {
-        y: "0%",
-        duration: 1,
-        stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.5,
-      },
-      "<"
-    );
-  };
-
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     if (isAnimating) return;
 
     onMenuStateChange?.(false);
@@ -300,7 +220,87 @@ const Menu = ({ onMenuStateChange }) => {
       },
       "-=0.45"
     );
-  };
+  }, [isAnimating, onMenuStateChange]);
+
+  const navigateTo = useCallback((path) => {
+    closeMenu();
+
+    setTimeout(() => {
+      const targetElement = document.querySelector(path);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 600);
+  }, [closeMenu]);
+
+  const openMenu = useCallback(() => {
+    if (isAnimating) return;
+
+    onMenuStateChange?.(true);
+
+    menuOverlayRef.current.style.pointerEvents = "all";
+
+    setIsAnimating(true);
+    const tl = gsap.timeline({
+      onComplete: () => setIsAnimating(false),
+    });
+
+    tl.to(menuBtnRef.current, {
+      y: "-100%",
+      duration: 0.5,
+      ease: "power3.out",
+      onComplete: () => {
+        navRef.current.style.pointerEvents = "none";
+        gsap.set(menuBtnRef.current, { y: "100%" });
+      },
+    });
+
+    tl.to(
+      menuOverlayRef.current,
+      {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power3.out",
+      },
+      "-=0.45"
+    );
+
+    tl.to(
+      closeBtnRef.current,
+      {
+        y: "0%",
+        duration: 1,
+        ease: "power3.out",
+      },
+      "-=0.5"
+    );
+
+    tl.to(
+      ".menu-overlay-items .revealer a",
+      {
+        y: "0%",
+        duration: 1,
+        stagger: 0.075,
+        ease: "power3.out",
+      },
+      "<"
+    );
+
+    tl.to(
+      ".menu-footer .revealer p, .menu-footer .revealer a",
+      {
+        y: "0%",
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        delay: 0.5,
+      },
+      "<"
+    );
+  }, [isAnimating, onMenuStateChange]);
 
   return (
     <>
@@ -449,4 +449,4 @@ const Menu = ({ onMenuStateChange }) => {
   );
 };
 
-export default Menu;
+export default React.memo(Menu);

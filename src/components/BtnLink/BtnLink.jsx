@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useTransitionRouter } from "next-view-transitions";
 import { IoMdArrowForward, IoMdArrowDown } from "react-icons/io";
 
@@ -99,4 +100,4 @@ const BtnLink = ({
   );
 };
 
-export default BtnLink;
+export default React.memo(BtnLink);

@@ -1,7 +1,8 @@
 "use client";
 import "./HowWeWork.css";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { debounce } from "@/utils/debounce";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -55,10 +56,12 @@ const HowWeWork = () => {
   useEffect(() => {
     checkMobile();
 
-    window.addEventListener("resize", checkMobile);
+    // Debounce resize handler to improve performance
+    const debouncedCheckMobile = debounce(checkMobile, 200);
+    window.addEventListener("resize", debouncedCheckMobile);
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("resize", debouncedCheckMobile);
     };
   }, []);
 
@@ -214,4 +217,4 @@ const HowWeWork = () => {
   );
 };
 
-export default HowWeWork;
+export default React.memo(HowWeWork);

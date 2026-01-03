@@ -1,7 +1,7 @@
 "use client";
 import "./Footer.css";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 
 import { useGSAP } from "@gsap/react";
@@ -159,4 +159,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

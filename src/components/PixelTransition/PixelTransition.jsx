@@ -1,13 +1,13 @@
 "use client";
 import "./PixelTransition.css";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function PixelTransition() {
+function PixelTransition() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
@@ -65,3 +65,5 @@ export default function PixelTransition() {
     </section>
   );
 }
+
+export default React.memo(PixelTransition);

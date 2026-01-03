@@ -1,6 +1,7 @@
 "use client";
 import "./InnovateSection.css";
 
+import React from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -154,4 +155,4 @@ const InnovateSection = () => {
   );
 };
 
-export default InnovateSection;
+export default React.memo(InnovateSection);

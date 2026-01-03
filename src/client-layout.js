@@ -1,12 +1,30 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Menu from "@/components/Menu/Menu";
 
 import { ReactLenis } from "lenis/react";
+import { debounce } from "@/utils/debounce";
 
 export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1000);
+    };
+
+    checkMobile();
+
+    // Debounced resize handler
+    const debouncedCheckMobile = debounce(checkMobile, 200);
+    window.addEventListener("resize", debouncedCheckMobile);
+
+    return () => {
+      window.removeEventListener("resize", debouncedCheckMobile);
+    };
+  }, []);
 
   const scrollSettings = isMobile
     ? {

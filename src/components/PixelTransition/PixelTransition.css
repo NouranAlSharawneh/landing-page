@@ -21,6 +21,7 @@
   height: 100%;
   background-color: var(--foreground);
   transition: background-color 0.3s ease;
+  will-change: background-color;
 }
 
 @media screen and (max-width: 767px) {

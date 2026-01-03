@@ -1,5 +1,11 @@
+.line-wrapper {
+  overflow: hidden;
+  display: block;
+}
+
 .line {
   position: relative;
   transform: translateY(100%);
   will-change: transform;
+  display: block;
 }
