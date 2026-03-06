@@ -3,21 +3,42 @@ import { useState, useEffect } from "react";
 
 import Menu from "@/components/Menu/Menu";
 
-import { ReactLenis } from "lenis/react";
+import { ReactLenis, useLenis } from "lenis/react";
+import { gsap } from "gsap";
 import { debounce } from "@/utils/debounce";
+
+function LenisGSAPSync() {
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    gsap.ticker.lagSmoothing(0);
+
+    const tickerCallback = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(tickerCallback);
+
+    return () => {
+      gsap.ticker.remove(tickerCallback);
+    };
+  }, [lenis]);
+
+  return null;
+}
 
 export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Check if mobile on mount
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 1000);
     };
 
     checkMobile();
 
-    // Debounced resize handler
     const debouncedCheckMobile = debounce(checkMobile, 200);
     window.addEventListener("resize", debouncedCheckMobile);
 
@@ -28,38 +49,26 @@ export default function ClientLayout({ children }) {
 
   const scrollSettings = isMobile
     ? {
-        duration: 1.3,
+        duration: 1.0,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: "vertical",
-        gestureDirection: "vertical",
-        smooth: true,
-        smoothTouch: true,
-        touchMultiplier: 0.8,
-        infinite: false,
-        lerp: 0.1,
         wheelMultiplier: 1,
-        orientation: "vertical",
         smoothWheel: true,
         syncTouch: true,
+        syncTouchLerp: 0.075,
+        touchMultiplier: 0.8,
+        autoRaf: false,
       }
     : {
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: "vertical",
-        gestureDirection: "vertical",
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-        lerp: 0.1,
         wheelMultiplier: 1,
-        orientation: "vertical",
         smoothWheel: true,
-        syncTouch: true,
+        autoRaf: false,
       };
 
   return (
     <ReactLenis root options={scrollSettings}>
+      <LenisGSAPSync />
       <>
         <Menu />
       </>

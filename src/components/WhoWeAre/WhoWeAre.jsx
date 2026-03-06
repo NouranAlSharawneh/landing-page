@@ -16,70 +16,53 @@ const WhoWeAre = () => {
     const isMobile = window.innerWidth <= 768;
 
     const maxTranslateX = containerWidth - viewportWidth;
-    const targetProgress = 1;
-    const maxTranslateAtTarget = maxTranslateX / targetProgress;
 
     // Adjust scroll distances for mobile
     const clipPathScrollMultiplier = isMobile ? 1 : 1.5;
     const pinScrollMultiplier = isMobile ? 2 : 4;
 
-    ScrollTrigger.create({
-      trigger: ".whoweare",
-      start: "top bottom",
-      end: `bottom+=${window.innerHeight * clipPathScrollMultiplier} top`,
-      scrub: 1.5,
-      invalidateOnRefresh: false,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const clipPathValue = Math.min(progress * 100, 100);
+    gsap.fromTo(
+      ".whoweare-container",
+      { clipPath: "circle(0% at 50% 50%)" },
+      {
+        clipPath: "circle(100% at 50% 50%)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".whoweare",
+          start: "top bottom",
+          end: `bottom+=${window.innerHeight * clipPathScrollMultiplier} top`,
+          scrub: 1.5,
+        },
+      }
+    );
 
-        gsap.set(".whoweare-container", {
-          clipPath: `circle(${clipPathValue}% at 50% 50%)`,
-        });
-      },
-      onComplete: () => {
-        gsap.set(".whoweare-container", {
-          clipPath: `circle(100% at 50% 50%)`,
-        });
-      },
-    });
-
-    ScrollTrigger.create({
-      trigger: ".whoweare",
-      start: "top top",
-      end: `+=${window.innerHeight * pinScrollMultiplier}`,
-      pin: true,
-      pinSpacing: true,
-      scrub: 1.5,
-      anticipatePin: 0.5,
-      invalidateOnRefresh: false,
-      onUpdate: (self) => {
-        const progress = self.progress;
-
-        let opacity, scale, translateX;
-
-        if (progress <= 0.3) {
-          const fadeProgress = progress / 0.3;
-          opacity = fadeProgress;
-          scale = 0.85 + 0.15 * fadeProgress;
-          translateX = 0;
-        } else {
-          opacity = 1;
-          scale = 1;
-          const adjustedProgress = (progress - 0.3) / (1 - 0.3);
-          translateX = -Math.min(
-            adjustedProgress * maxTranslateAtTarget,
-            maxTranslateX
-          );
-        }
-
-        gsap.set(whoweareScroll, {
-          opacity: opacity,
-          scale: scale,
-          x: translateX,
-        });
+    const horizontalTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".whoweare",
+        start: "top top",
+        end: `+=${window.innerHeight * pinScrollMultiplier}`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1.5,
+        anticipatePin: 0.5,
       },
     });
+
+    // Phase 1: fade in + scale up (0% to 30% of timeline)
+    horizontalTl.fromTo(
+      whoweareScroll,
+      { opacity: 0, scale: 0.85 },
+      { opacity: 1, scale: 1, ease: "none", duration: 0.3 },
+      0
+    );
+
+    // Phase 2: horizontal scroll (30% to 100% of timeline)
+    horizontalTl.fromTo(
+      whoweareScroll,
+      { x: 0 },
+      { x: -maxTranslateX, ease: "none", duration: 0.7 },
+      0.3
+    );
   }, []);
 
   return (
