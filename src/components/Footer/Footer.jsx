@@ -151,7 +151,7 @@ const Footer = () => {
             <p>
               Developed by — <span>enigma</span>
             </p>
-            <p>All rights reserverd &copy; 2025</p>
+            <p>All rights reserverd &copy; {new Date().getFullYear()}</p>
           </div>
         </div>
       </div>

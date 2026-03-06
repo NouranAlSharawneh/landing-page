@@ -20,8 +20,8 @@ const WhoWeAre = () => {
     const maxTranslateAtTarget = maxTranslateX / targetProgress;
 
     // Adjust scroll distances for mobile
-    const clipPathScrollMultiplier = isMobile ? 1 : 2;
-    const pinScrollMultiplier = isMobile ? 3 : 6;
+    const clipPathScrollMultiplier = isMobile ? 1 : 1.5;
+    const pinScrollMultiplier = isMobile ? 2 : 4;
 
     ScrollTrigger.create({
       trigger: ".whoweare",

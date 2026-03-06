@@ -27,6 +27,7 @@ const Menu = ({ onMenuStateChange }) => {
 
   const menuItemsRef = useRef(null);
   const menuFooterColsRef = useRef(null);
+  const openTlRef = useRef(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -145,8 +146,8 @@ const Menu = ({ onMenuStateChange }) => {
     return exactCurrentPath === path;
   };
 
-  const closeMenu = useCallback(() => {
-    if (isAnimating) return;
+  const closeMenu = useCallback((force = false) => {
+    if (!force && isAnimating) return;
 
     onMenuStateChange?.(false);
 
@@ -223,7 +224,20 @@ const Menu = ({ onMenuStateChange }) => {
   }, [isAnimating, onMenuStateChange]);
 
   const navigateTo = useCallback((path) => {
-    closeMenu();
+    if (openTlRef.current) {
+      openTlRef.current.kill();
+      openTlRef.current = null;
+
+      // Force menu items to their final open positions
+      gsap.set(closeBtnRef.current, { y: "0%" });
+      gsap.set(".menu-overlay-items .revealer a", { y: "0%" });
+      gsap.set(".menu-footer .revealer p, .menu-footer .revealer a", { y: "0%" });
+      gsap.set(menuOverlayRef.current, { opacity: 1 });
+      gsap.set(menuBtnRef.current, { y: "100%" });
+      navRef.current.style.pointerEvents = "none";
+    }
+
+    closeMenu(true);
 
     setTimeout(() => {
       const targetElement = document.querySelector(path);
@@ -245,8 +259,12 @@ const Menu = ({ onMenuStateChange }) => {
 
     setIsAnimating(true);
     const tl = gsap.timeline({
-      onComplete: () => setIsAnimating(false),
+      onComplete: () => {
+        openTlRef.current = null;
+        setIsAnimating(false);
+      },
     });
+    openTlRef.current = tl;
 
     tl.to(menuBtnRef.current, {
       y: "-100%",
