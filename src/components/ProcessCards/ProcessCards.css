@@ -86,7 +86,7 @@
   }
 
   .process-card-index {
-    flex: 1;
+    flex: none;
   }
 
   .process-card-content-wrapper {
