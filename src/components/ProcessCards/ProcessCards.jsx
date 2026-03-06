@@ -16,21 +16,21 @@ const ProcessCards = () => {
       title: "Photobooth",
       image: "/images/ourProducts/photobooth.jpeg",
       description:
-        "Blending real photography with AI creativity — photos delivered instantly to the user.",
+        "An interactive photo experience that transforms guest photos into unique AI-generated artworks inspired by the event theme. Guests capture their photo through the booth and instantly receive a stylized portrait they can share. It creates a fun and memorable moment for attendees.",
     },
     {
       index: "02",
       title: "Sketch to Art",
       image: "/images/ourProducts/sketchToArt.jpeg",
       description:
-        "We created an interactive system where users can draw a simple sketch, and our AI instantly transforms it into a stunning digital artwork. It’s an immersive installation that turns pure imagination into visual art—inviting users to create, explore, and be inspired by the power of AI-driven creativity.",
+        "An interactive installation where guests draw simple sketches on a touchscreen and watch them transform into detailed digital artworks. The final illustration keeps the original idea while enhancing it with artistic styles inspired by the event theme.",
     },
     {
       index: "03",
       title: "Mosaic Grid",
       image: "/images/ourProducts/mosaic.jpeg",
       description:
-        "Our Mosaic Grid system transforms event engagement into a meaningful, memorable experience. It allows attendees to capture photos during the event and instantly place them within a beautifully designed digital mosaic grid displayed above your brand or event logo.",
+        "A dynamic visual installation where guest photos  taken by the AI photobooth combine to form a large digital mosaic. Hundreds of small images gradually build a bigger artwork representing the event theme or brand identity.",
     },
   ];
 

@@ -92,4 +92,8 @@
   .process-card-content-wrapper {
     width: 100%;
   }
+
+  .process-card-copy-description p {
+    font-size: 0.875rem;
+  }
 }
